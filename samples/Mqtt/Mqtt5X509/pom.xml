@@ -39,7 +39,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <mainClass>mqtt5x509.Mqtt5X509</mainClass>
+                    <mainClass>mqtt5x509.TemperatureSensorDevice</mainClass>
                 </configuration>
             </plugin>
         </plugins>

@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.text.DecimalFormat;
 
 import software.amazon.awssdk.crt.CRT;
 import software.amazon.awssdk.crt.CrtResource;
@@ -21,7 +22,7 @@ import software.amazon.awssdk.iot.AwsIotMqtt5ClientBuilder;
 /**
  * MQTT5 X509 Sample (mTLS)
  */
-public class Mqtt5X509 {
+public class TemperatureSensorDevice {
 
     // ------------------------- ARGUMENT PARSING -------------------------
     static class Args {
@@ -195,8 +196,15 @@ public class Mqtt5X509 {
             System.out.printf("==== Sending %d message(s) ====%n%n", args.count);
         }
         int publishCount = 1;
+        double max = 50; 
+        double min = 0; 
+        double t = 0; 
+        DecimalFormat df = new DecimalFormat("#.##"); 
+        String t_as_string = ""; 
         while (args.count == 0 || publishCount <= args.count) {
-            String payload = args.message + " [" + publishCount + "]";
+            t = (Math.random()*((max-min)+1))+min; 
+            t_as_string = df.format(t); 
+            String payload = "{\"temp\": " + t_as_string + "}";
             System.out.printf("Publishing message to topic '%s': %s%n", args.topic, payload);
             PublishPacket publishPacket = PublishPacket.of(
                 args.topic,
@@ -209,7 +217,7 @@ public class Mqtt5X509 {
                 throw new RuntimeException("Mqtt5 X509: execution failure", ex);
             }
             try {
-                Thread.sleep(Duration.ofMillis(1500).toMillis());
+                Thread.sleep(Duration.ofMillis(2000).toMillis());
             } catch (InterruptedException ex) {
                 throw new RuntimeException("Mqtt5 X509: execution failure", ex);
             }

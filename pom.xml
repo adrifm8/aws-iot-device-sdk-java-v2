@@ -28,6 +28,9 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
                 <version>2.7</version>
+                  <configuration>
+                           <mainClass>mqtt5x509.TemperatureSensorDevice</mainclass>
+                  <configuration>
             </plugin>
         </plugins>
     </build>

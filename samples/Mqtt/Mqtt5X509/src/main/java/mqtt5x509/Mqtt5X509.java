@@ -19,7 +19,7 @@ import software.amazon.awssdk.crt.mqtt5.*;
 import software.amazon.awssdk.crt.mqtt5.packets.*;
 import software.amazon.awssdk.iot.AwsIotMqtt5ClientBuilder;
 
-/**
+/** 
  * MQTT5 X509 Sample (mTLS)
  */
 public class TemperatureSensorDevice {
